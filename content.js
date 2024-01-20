@@ -1,11 +1,19 @@
 function togglePictureInPicture() {
   if (document.pictureInPictureElement) {
-    console.log("exiting picture in picture");
     document.exitPictureInPicture();
   } else if (document.pictureInPictureEnabled) {
-    console.log("requesting picture in picture");
     const video = document.getElementsByTagName("video")[0];
     video.requestPictureInPicture();
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.setActionHandler("previoustrack", () => {
+        const backwardTime = video.currentTime - 5;
+        video.currentTime = backwardTime <= 0 ? 0 : backwardTime;
+      });
+      navigator.mediaSession.setActionHandler("nexttrack", () => {
+        const fordwardTime = video.currentTime + 5;
+        video.currentTime = fordwardTime >= video.duration ? video.duration : fordwardTime;
+      });
+    }
   }
 }
 
