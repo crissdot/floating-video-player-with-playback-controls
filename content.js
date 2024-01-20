@@ -3,6 +3,8 @@ function togglePictureInPicture() {
     document.exitPictureInPicture();
   } else if (document.pictureInPictureEnabled) {
     const video = document.getElementsByTagName("video")[0];
+    if (!video) return;
+
     video.requestPictureInPicture();
     if ("mediaSession" in navigator) {
       navigator.mediaSession.setActionHandler("previoustrack", () => {
