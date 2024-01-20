@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Floating video",
+  "description": "Floating video with playback controls",
+  "version": "1.0",
+  "action": {
+    "default_title": "Click to activate floating video player"
+  },
+  "permissions": ["activeTab", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
